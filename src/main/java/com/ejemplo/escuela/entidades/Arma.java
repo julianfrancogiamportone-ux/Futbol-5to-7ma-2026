@@ -5,6 +5,7 @@ public class Arma {
     private String nombre;
     private int BonificadorDanio;
     private float peso;
+    
     public Arma(String nombre, int BonificadorDanio) {
         this.nombre = nombre;
         this.BonificadorDanio = BonificadorDanio;

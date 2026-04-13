@@ -9,9 +9,11 @@ public class Peleador {
     private Arma armaEquipada;
     private List<Arma> inventario;
     private List<Ataque> habilidades;
-    public Peleador() {
+
+    public Peleador(String nombre, int puntosVida, int energia, float defensaBase) {
+        this.nombre = nombre;
+        this.puntosVida = puntosVida;
+        this.energia = energia;
+        this.defensaBase = defensaBase;
     }
-
-    
 }
-
