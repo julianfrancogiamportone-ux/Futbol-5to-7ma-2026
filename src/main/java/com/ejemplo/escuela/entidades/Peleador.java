@@ -8,22 +8,12 @@ public class Peleador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
     private String nombre;
     private int puntosVida;
     private int energia;    
     private float defensaBase;
+    private Arma armaEquipada;;
     
-    // Relación Uno a Uno: Peleador es el dueño
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "arma_equipada_id", referencedColumnName = "id")
-    private Arma armaEquipada;
-    
-    // Relación Uno a Muchos: Peleador tiene muchos Ataques
-    @OneToMany(mappedBy = "peleador", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ataque> habilidades;
-    
-    // Relación Muchos a Muchos: Peleador es el dueño
     @ManyToMany
     @JoinTable(
         name = "peleador_arma",
@@ -31,6 +21,14 @@ public class Peleador {
         inverseJoinColumns = @JoinColumn(name = "arma_id")
     )
     private List<Arma> inventario;
+
+    @ManyToMany
+    @JoinTable(
+        name = "peleador_ataque",
+        joinColumns = @JoinColumn(name = "peleador_id"),
+        inverseJoinColumns = @JoinColumn(name = "ataque_id")
+    )
+    private List<Ataque> habilidades;
 
     public Peleador() {
     }
