@@ -10,8 +10,8 @@ public class Ataque {
     private int id;
     
     private String nombre;
-    private int danioBase;
     private int costoEnergia;
+    private int danioBase;
 
     // Lado dueño de la relación Uno a Muchos
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,10 +21,10 @@ public class Ataque {
     public Ataque() {
     }
 
-    public Ataque(String nombre, int danioBase, int costoEnergia) {
+    public Ataque(String nombre, int costoEnergia, int danioBase) {
         this.nombre = nombre;
-        this.danioBase = danioBase;
         this.costoEnergia = costoEnergia;
+        this.danioBase = danioBase;
     }
 
     // Getters y Setters
