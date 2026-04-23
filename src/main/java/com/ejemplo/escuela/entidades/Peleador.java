@@ -12,7 +12,6 @@ public class Peleador {
     private int puntosVida;
     private int energia;    
     private float defensaBase;
-    private Arma armaEquipada;;
     
     @ManyToMany
     @JoinTable(
@@ -38,7 +37,6 @@ public class Peleador {
         this.puntosVida = puntosVida;
         this.energia = energia;
         this.defensaBase = defensaBase;
-        this.armaEquipada = armaEquipada;
         this.habilidades = habilidades;
         this.inventario = inventario;
     }
@@ -84,13 +82,7 @@ public class Peleador {
         this.defensaBase = defensaBase;
     }
 
-    public Arma getArmaEquipada() {
-        return armaEquipada;
-    }
-
-    public void setArmaEquipada(Arma armaEquipada) {
-        this.armaEquipada = armaEquipada;
-    }
+    
 
     public List<Arma> getInventario() {
         return inventario;
