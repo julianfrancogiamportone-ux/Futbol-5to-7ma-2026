@@ -10,21 +10,19 @@ public class Ataque {
     private int id;
     
     private String nombre;
-    private int danioBase;
     private int costoEnergia;
+    private int danioBase;
 
-    // Lado dueño de la relación Uno a Muchos
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "peleador_id")
-    private Peleador peleador;
+    @ManyToMany(mappedBy = "habilidades")
+    private List<Peleador> peleadores;
 
     public Ataque() {
     }
 
-    public Ataque(String nombre, int danioBase, int costoEnergia) {
+    public Ataque(String nombre, int costoEnergia, int danioBase) {
         this.nombre = nombre;
-        this.danioBase = danioBase;
         this.costoEnergia = costoEnergia;
+        this.danioBase = danioBase;
     }
 
     // Getters y Setters
@@ -58,13 +56,5 @@ public class Ataque {
 
     public void setCostoEnergia(int costoEnergia) {
         this.costoEnergia = costoEnergia;
-    }
-
-    public Peleador getPeleador() {
-        return peleador;
-    }
-
-    public void setPeleador(Peleador peleador) {
-        this.peleador = peleador;
     }
 }

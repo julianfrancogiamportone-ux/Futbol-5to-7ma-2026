@@ -10,28 +10,24 @@ public class Arma {
     private int id;
     
     private String nombre;
-    private int BonificadorDanio;
+    private int bonificadorDanio;
     private float peso;
     
-    // Lado inverso de la relación Uno a Uno
-    @OneToOne(mappedBy = "armaEquipada")
-    private Peleador peleador;
-    
-    // Lado inverso de la relación Muchos a Muchos
-    @ManyToMany(mappedBy = "inventario", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "inventario")
     private List<Peleador> peleadores;
+
     
     public Arma() {
     }
 
-    public Arma(String nombre, int BonificadorDanio) {
+    public Arma(String nombre, int bonificadorDanio) {
         this.nombre = nombre;
-        this.BonificadorDanio = BonificadorDanio;
+        this.bonificadorDanio = bonificadorDanio;
     }
 
-    public Arma(String nombre, int BonificadorDanio, float peso) {
+    public Arma(String nombre, int bonificadorDanio, float peso) {
         this.nombre = nombre;
-        this.BonificadorDanio = BonificadorDanio;
+        this.bonificadorDanio = bonificadorDanio;
         this.peso = peso;
     }
 
@@ -53,11 +49,11 @@ public class Arma {
     }
 
     public int getBonificadorDanio() {
-        return BonificadorDanio;
+        return bonificadorDanio;
     }
 
     public void setBonificadorDanio(int bonificadorDanio) {
-        this.BonificadorDanio = bonificadorDanio;
+        this.bonificadorDanio = bonificadorDanio;
     }
 
     public float getPeso() {
@@ -66,14 +62,6 @@ public class Arma {
 
     public void setPeso(float peso) {
         this.peso = peso;
-    }
-
-    public Peleador getPeleador() {
-        return peleador;
-    }
-
-    public void setPeleador(Peleador peleador) {
-        this.peleador = peleador;
     }
 
     public List<Peleador> getPeleadores() {
