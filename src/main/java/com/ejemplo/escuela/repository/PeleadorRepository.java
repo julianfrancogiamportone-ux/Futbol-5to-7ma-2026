@@ -1,5 +1,7 @@
 package com.ejemplo.escuela.repository;
 
-public interface PeleadorRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.ejemplo.escuela.entidades.Peleador;
 
+public interface PeleadorRepository extends JpaRepository<Peleador, Integer> {
 }

@@ -1,5 +1,9 @@
 package com.ejemplo.escuela.iservice;
 
-public interface PeleadorIService {
+import java.util.List;
+import com.ejemplo.escuela.entidades.Peleador;
 
+public interface PeleadorIService {
+    public List<Peleador> findAllPeleadores();
+    public Peleador savePeleador(Peleador peleador);
 }
