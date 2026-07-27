@@ -2,15 +2,15 @@
 //api de base de datos, gestionado en el controller
 const API_DRAGONBALL = 'http://localhost:8080/api/characters';
 const API_NARUTO = 'http://localhost:8081/api/characters';
-const FALLBACK_CHARACTERS = [
-    { nombre: 'Goku', raza: 'Saiyajin', nivelDePoder: 9000, url_imagen: '' },
-    { nombre: 'Vegeta', raza: 'Saiyajin', nivelDePoder: 8500, url_imagen: '' },
-    { nombre: 'Bulma', raza: 'Humano', nivelDePoder: 3000, url_imagen: '' }
+const FALLBACK_AMERICA = [
+    { nombre: 'Messi', raza: 'Saiyajin', nivelDePoder: 9000, url_imagen: 'imagenes/messi.png' },
+    { nombre: 'Cristiano Ronaldo', raza: 'Saiyajin', nivelDePoder: 8500, url_imagen: 'imagenes/cr7.png' },
+    { nombre: 'Beltran', raza: 'Humano', nivelDePoder: 3000, url_imagen: 'imagenes/beltran.jpg' }
 ];
-const FALLBACK_NINJAS = [
-    { nombre: 'Naruto', aldea: 'Hoja', nivelDePoder: 8000, url_imagen: '' },
-    { nombre: 'Sasuke', aldea: 'Hoja', nivelDePoder: 7800, url_imagen: '' },
-    { nombre: 'Kakashi', aldea: 'Hoja', nivelDePoder: 6500, url_imagen: '' }
+const FALLBACK_EUROPA = [
+    { nombre: 'Haaland', aldea: 'Hoja', nivelDePoder: 8000, url_imagen: 'imagenes/haaland.png' },
+    { nombre: 'Kane', aldea: 'Hoja', nivelDePoder: 7800, url_imagen: 'imagenes/kane.png' },
+    { nombre: 'Janson', aldea: 'Hoja', nivelDePoder: 6500, url_imagen: 'imagenes/janson.png' }
 ];
 //elementos del html
 const fighter1Select = document.getElementById('fighter1');
@@ -20,8 +20,8 @@ const fighter2Image = document.getElementById('fighter2Image');
 const fightButton = document.getElementById('fightButton');
 const resultDiv = document.getElementById('result');
 //guardamos los datos obtenidos
-let characters = [];
-let ninjas = [];
+let america = [];
+let europa = [];
 
 async function loadFromApi(url, fallback) {
     try {
@@ -39,14 +39,14 @@ async function loadFromApi(url, fallback) {
 
 //Traer a los luchadores
 async function fetchData() {
-    characters = await loadFromApi(API_DRAGONBALL, FALLBACK_CHARACTERS);
-    ninjas = await loadFromApi(API_NARUTO, FALLBACK_NINJAS);
+    america = await loadFromApi(API_DRAGONBALL, FALLBACK_AMERICA);
+    europa = await loadFromApi(API_NARUTO, FALLBACK_EUROPA);
     loadFighters();
 }
 //Llenar las listas
 //por cada peleador creamos un option en el selector
 function loadFighters() {
-    [...characters, ...ninjas].forEach(fighter => {
+    [...america, ...europa].forEach(fighter => {
         const option1 = document.createElement('option');
         option1.value = JSON.stringify(fighter);
         option1.text = `${fighter.nombre} (${fighter.raza || fighter.aldea})`;
