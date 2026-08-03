@@ -3,14 +3,14 @@
 const API_DRAGONBALL = 'http://localhost:8080/api/characters';
 const API_NARUTO = 'http://localhost:8081/api/characters';
 const FALLBACK_AMERICA = [
-    { nombre: 'Messi', raza: 'Saiyajin', nivelDePoder: 9000, url_imagen: 'imagenes/messi.png' },
-    { nombre: 'Cristiano Ronaldo', raza: 'Saiyajin', nivelDePoder: 8500, url_imagen: 'imagenes/cr7.png' },
-    { nombre: 'Beltran', raza: 'Humano', nivelDePoder: 3000, url_imagen: 'imagenes/beltran.jpg' }
+    { nombre: 'Messi', club: 'Inter Miami', nivelDePoder: 9000, url_imagen: 'imagenes/messi.png' },
+    { nombre: 'Cristiano Ronaldo', club: 'Al Nassr', nivelDePoder: 8500, url_imagen: 'imagenes/cr7.png' },
+    { nombre: 'Beltran', club: 'River Plate', nivelDePoder: 3000, url_imagen: 'imagenes/beltran.jpg' }
 ];
 const FALLBACK_EUROPA = [
-    { nombre: 'Haaland', aldea: 'Hoja', nivelDePoder: 8000, url_imagen: 'imagenes/haaland.png' },
-    { nombre: 'Kane', aldea: 'Hoja', nivelDePoder: 7800, url_imagen: 'imagenes/kane.png' },
-    { nombre: 'Janson', aldea: 'Hoja', nivelDePoder: 6500, url_imagen: 'imagenes/janson.png' }
+    { nombre: 'Haaland', club: 'Manchester City', nivelDePoder: 8000, url_imagen: 'imagenes/haaland.png' },
+    { nombre: 'Kane', club: 'Bayern Munich', nivelDePoder: 7800, url_imagen: 'imagenes/kane.png' },
+    { nombre: 'Janson', club: 'Boca Juniors', nivelDePoder: 6500, url_imagen: 'imagenes/janson.png' }
 ];
 //elementos del html
 const fighter1Select = document.getElementById('fighter1');
@@ -49,11 +49,11 @@ function loadFighters() {
     [...america, ...europa].forEach(fighter => {
         const option1 = document.createElement('option');
         option1.value = JSON.stringify(fighter);
-        option1.text = `${fighter.nombre} (${fighter.raza || fighter.aldea})`;
+        option1.text = `${fighter.nombre} — ${fighter.club}`;
         fighter1Select.appendChild(option1);
         const option2 = document.createElement('option');
         option2.value = JSON.stringify(fighter);
-        option2.text = `${fighter.nombre} (${fighter.raza || fighter.aldea})`;
+        option2.text = `${fighter.nombre} — ${fighter.club}`;
         fighter2Select.appendChild(option2);
     });
     const selected = JSON.parse(fighter1Select.value);
