@@ -1,18 +1,20 @@
 //Variables Globales
 //api de base de datos, gestionado en el controller
-const API_DRAGONBALL = 'http://localhost:8080/api/characters';
-const API_NARUTO = 'http://localhost:8081/api/characters';
+const API_AMERICA = 'http://localhost:8080/api/characters';
+// const API_EUROPA = 'http://localhost:8081/api/characters';
+
 const FALLBACK_AMERICA = [
     { nombre: 'Messi', club: 'Inter Miami', nivelDePoder: 9000, url_imagen: 'imagenes/messi.png' },
     { nombre: 'Beltran', club: 'River Plate', nivelDePoder: 3000, url_imagen: 'imagenes/beltran.jpg' },
-    { nombre: 'Janson', club: 'Boca Juniors', nivelDePoder: 6500, url_imagen: 'imagenes/janson.png' }
+    { nombre: 'Janson', club: 'Boca Juniors', nivelDePoder: 6500, url_imagen: 'imagenes/pibejanson.png' }
 ];
-const FALLBACK_EUROPA = [
-    { nombre: 'Haaland', club: 'Manchester City', nivelDePoder: 8000, url_imagen: 'imagenes/haaland.png' },
-    { nombre: 'Kane', club: 'Bayern Munich', nivelDePoder: 7800, url_imagen: 'imagenes/kane.png' },
-    { nombre: 'Cristiano Ronaldo', club: 'Al Nassr', nivelDePoder: 8500, url_imagen: 'imagenes/cr7.png' }   
-   
-];
+
+// const FALLBACK_EUROPA = [
+//     { nombre: 'Haaland', club: 'Manchester City', nivelDePoder: 8000, url_imagen: 'imagenes/haaland.png' },
+//     { nombre: 'Kane', club: 'Bayern Munich', nivelDePoder: 7800, url_imagen: 'imagenes/kane.png' },
+//     { nombre: 'Cristiano Ronaldo', club: 'Al Nassr', nivelDePoder: 8500, url_imagen: 'imagenes/cr7.png' }   
+// ];
+
 //elementos del html
 const fighter1Select = document.getElementById('fighter1');
 const fighter2Select = document.getElementById('fighter2');
@@ -20,6 +22,7 @@ const fighter1Image = document.getElementById('fighter1Image');
 const fighter2Image = document.getElementById('fighter2Image');
 const fightButton = document.getElementById('fightButton');
 const resultDiv = document.getElementById('result');
+
 //guardamos los datos obtenidos
 let america = [];
 let europa = [];
@@ -40,8 +43,8 @@ async function loadFromApi(url, fallback) {
 
 //Traer a los luchadores
 async function fetchData() {
-    america = await loadFromApi(API_DRAGONBALL, FALLBACK_AMERICA);
-    europa = await loadFromApi(API_NARUTO, FALLBACK_EUROPA);
+    america = await loadFromApi(API_AMERICA, FALLBACK_AMERICA);
+    //europa = await loadFromApi(API_EUROPA, FALLBACK_EUROPA);
     loadFighters();
 }
 //Llenar las listas
