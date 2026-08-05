@@ -4,13 +4,14 @@ const API_DRAGONBALL = 'http://localhost:8080/api/characters';
 const API_NARUTO = 'http://localhost:8081/api/characters';
 const FALLBACK_AMERICA = [
     { nombre: 'Messi', club: 'Inter Miami', nivelDePoder: 9000, url_imagen: 'imagenes/messi.png' },
-    { nombre: 'Cristiano Ronaldo', club: 'Al Nassr', nivelDePoder: 8500, url_imagen: 'imagenes/cr7.png' },
-    { nombre: 'Beltran', club: 'River Plate', nivelDePoder: 3000, url_imagen: 'imagenes/beltran.jpg' }
+    { nombre: 'Beltran', club: 'River Plate', nivelDePoder: 3000, url_imagen: 'imagenes/beltran.jpg' },
+    { nombre: 'Janson', club: 'Boca Juniors', nivelDePoder: 6500, url_imagen: 'imagenes/janson.png' }
 ];
 const FALLBACK_EUROPA = [
     { nombre: 'Haaland', club: 'Manchester City', nivelDePoder: 8000, url_imagen: 'imagenes/haaland.png' },
     { nombre: 'Kane', club: 'Bayern Munich', nivelDePoder: 7800, url_imagen: 'imagenes/kane.png' },
-    { nombre: 'Janson', club: 'Boca Juniors', nivelDePoder: 6500, url_imagen: 'imagenes/janson.png' }
+    { nombre: 'Cristiano Ronaldo', club: 'Al Nassr', nivelDePoder: 8500, url_imagen: 'imagenes/cr7.png' }   
+   
 ];
 //elementos del html
 const fighter1Select = document.getElementById('fighter1');
