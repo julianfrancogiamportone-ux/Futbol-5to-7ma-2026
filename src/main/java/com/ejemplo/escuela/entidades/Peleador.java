@@ -12,6 +12,9 @@ public class Peleador {
     private int puntosVida;
     private int energia;    
     private float defensaBase;
+    private String club;
+    private String url_Imagen;
+    private String nivelDePoder;
     
     @ManyToMany
     @JoinTable(
@@ -98,5 +101,29 @@ public class Peleador {
 
     public void setHabilidades(List<Ataque> habilidades) {
         this.habilidades = habilidades;
+    }
+
+    public String getClub() {
+        return club;
+    }
+
+    public void setClub(String club) {
+        this.club = club;
+    }
+
+    public String getUrl_Imagen() {
+        return url_Imagen;
+    }
+
+    public void setUrl_Imagen(String url_Imagen) {
+        this.url_Imagen = url_Imagen;
+    }
+
+    public String getNivelDePoder() {
+        return nivelDePoder;
+    }
+
+    public void setNivelDePoder(String nivelDePoder) {
+        this.nivelDePoder = nivelDePoder;
     }
 }
