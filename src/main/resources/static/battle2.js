@@ -1,7 +1,7 @@
-//Variables Globales
-//api de base de datos, gestionado en el controller
+console.log('battle2.js cargado');
+
+// Variables Globales
 const API_AMERICA = 'http://localhost:8080/api/characters';
-// const API_EUROPA = 'http://localhost:8081/api/characters';
 
 const FALLBACK_AMERICA = [
     { nombre: 'Messi', club: 'Inter Miami', nivelDePoder: 9000, url_imagen: 'imagenes/messi.png' },
@@ -9,23 +9,22 @@ const FALLBACK_AMERICA = [
     { nombre: 'Janson', club: 'Boca Juniors', nivelDePoder: 6500, url_imagen: 'imagenes/pibejanson.png' }
 ];
 
-// const FALLBACK_EUROPA = [
-//     { nombre: 'Haaland', club: 'Manchester City', nivelDePoder: 8000, url_imagen: 'imagenes/haaland.png' },
-//     { nombre: 'Kane', club: 'Bayern Munich', nivelDePoder: 7800, url_imagen: 'imagenes/kane.png' },
-//     { nombre: 'Cristiano Ronaldo', club: 'Al Nassr', nivelDePoder: 8500, url_imagen: 'imagenes/cr7.png' }   
-// ];
-
-//elementos del html
+// Elementos del HTML
 const fighter1Select = document.getElementById('fighter1');
 const fighter2Select = document.getElementById('fighter2');
 const fighter1Image = document.getElementById('fighter1Image');
 const fighter2Image = document.getElementById('fighter2Image');
+const fighter1Name = document.getElementById('fighter1Name');
+const fighter2Name = document.getElementById('fighter2Name');
+const fighter1Club = document.getElementById('fighter1Club');
+const fighter2Club = document.getElementById('fighter2Club');
 const fightButton = document.getElementById('fightButton');
 const resultDiv = document.getElementById('result');
 
-//guardamos los datos obtenidos
+console.log('Elementos del HTML obtenidos:', { fighter1Select, fighter2Select, fightButton });
+
+// Guardar los datos obtenidos
 let america = [];
-let europa = [];
 
 async function loadFromApi(url, fallback) {
     try {
@@ -41,61 +40,115 @@ async function loadFromApi(url, fallback) {
     }
 }
 
-//Traer a los luchadores
+// Traer a los luchadores
 async function fetchData() {
     america = await loadFromApi(API_AMERICA, FALLBACK_AMERICA);
-    //europa = await loadFromApi(API_EUROPA, FALLBACK_EUROPA);
+    console.log('Jugadores cargados:', america);
     loadFighters();
 }
-//Llenar las listas
-//por cada peleador creamos un option en el selector
+
+// Llenar las listas
 function loadFighters() {
-    [...america, ...europa].forEach(fighter => {
+    if (america.length === 0) {
+        console.warn('No hay jugadores cargados');
+        return;
+    }
+
+    console.log('loadFighters ejecutándose, america.length:', america.length);
+
+    america.forEach(fighter => {
         const option1 = document.createElement('option');
         option1.value = JSON.stringify(fighter);
         option1.text = `${fighter.nombre} — ${fighter.club}`;
         fighter1Select.appendChild(option1);
+
         const option2 = document.createElement('option');
         option2.value = JSON.stringify(fighter);
         option2.text = `${fighter.nombre} — ${fighter.club}`;
         fighter2Select.appendChild(option2);
     });
-    const selected = JSON.parse(fighter1Select.value);
-    fighter1Image.src = selected.url_imagen || 'placeholder1.png';
-    const selected2 = JSON.parse(fighter2Select.value);
-    fighter2Image.src = selected2.url_imagen || 'placeholder2.png';
+
+    console.log('Options añadidas a los selectores');
+
+    // Mostrar el primer jugador seleccionado
+    updateFighter1();
+    if (america.length > 1) {
+        fighter2Select.selectedIndex = 1;
+    }
+    updateFighter2();
+    
+    console.log('updateFighter llamado');
 }
-//Reaccionar a los cambios
-// Actualizar la imagen al seleccionar un personaje
-fighter1Select.addEventListener('change', () => {
-    const selected = JSON.parse(fighter1Select.value);
-    fighter1Image.src = selected.url_imagen || 'placeholder1.png';
-});
-fighter2Select.addEventListener('change', () => {
-    const selected = JSON.parse(fighter2Select.value);
-    fighter2Image.src = selected.url_imagen || 'placeholder2.png';
-});
-//La Lógica de Batalla
-fightButton.addEventListener('click', () => {
-    const fighter1 = JSON.parse(fighter1Select.value);
-    const fighter2 = JSON.parse(fighter2Select.value);
-    if (!fighter1 || !fighter2) {
-        alert('Seleccioná ambos luchadores.');
+
+// Actualizar imagen, nombre y club del jugador 1
+function updateFighter1() {
+    if (fighter1Select.value === '') {
+        console.warn('fighter1Select.value está vacío');
         return;
     }
-    // Simular "nivelDePoder"
-    const power1 = fighter1.nivelDePoder || (Math.floor(Math.random() * 1000) + 500);
-    const power2 = fighter2.nivelDePoder || (Math.floor(Math.random() * 1000) +
-        500);
-    let winner;
-    if (power1 > power2) {
-        winner = fighter1.nombre;
-    } else if (power2 > power1) {
-        winner = fighter2.nombre;
-    } else {
-        winner = "¡Empate!";
+    
+    try {
+        const selected = JSON.parse(fighter1Select.value);
+        fighter1Image.src = selected.url_Imagen || 'imagenes/unknown.jpeg';
+        fighter1Name.textContent = selected.nombre;
+        fighter1Club.textContent = selected.club;
+        console.log('Fighter1 actualizado:', selected.nombre);
+    } catch (e) {
+        console.error('Error al parsear fighter1:', e);
     }
-    resultDiv.textContent = `🏆 El ganador es: ${winner}! 🥊`;
-    resultDiv.classList.remove('hidden');
+}
+
+// Actualizar imagen, nombre y club del jugador 2
+function updateFighter2() {
+    if (fighter2Select.value === '') {
+        console.warn('fighter2Select.value está vacío');
+        return;
+    }
+    
+    try {
+        const selected = JSON.parse(fighter2Select.value);
+        fighter2Image.src = selected.url_Imagen || 'imagenes/unknown.jpeg';
+        fighter2Name.textContent = selected.nombre;
+        fighter2Club.textContent = selected.club;
+        console.log('Fighter2 actualizado:', selected.nombre);
+    } catch (e) {
+        console.error('Error al parsear fighter2:', e);
+    }
+}
+
+// Reaccionar a los cambios
+fighter1Select.addEventListener('change', updateFighter1);
+fighter2Select.addEventListener('change', updateFighter2);
+
+// La Lógica de Batalla
+fightButton.addEventListener('click', () => {
+    if (fighter1Select.value === '' || fighter2Select.value === '') {
+        alert('Selecciona ambos luchadores.');
+        return;
+    }
+
+    try {
+        const fighter1 = JSON.parse(fighter1Select.value);
+        const fighter2 = JSON.parse(fighter2Select.value);
+
+        const power1 = fighter1.nivelDePoder || (Math.floor(Math.random() * 1000) + 500);
+        const power2 = fighter2.nivelDePoder || (Math.floor(Math.random() * 1000) + 500);
+
+        let resultText;
+        if (power1 > power2) {
+            resultText = `🏆 ¡${fighter1.nombre} gana la pelea! ⚽`;
+        } else if (power2 > power1) {
+            resultText = `🏆 ¡${fighter2.nombre} gana la pelea! ⚽`;
+        } else {
+            resultText = `🤝 ¡Es un empate!`;
+        }
+
+        resultDiv.textContent = resultText;
+        resultDiv.classList.remove('hidden');
+    } catch (e) {
+        console.error('Error en la batalla:', e);
+    }
 });
+
+console.log('A punto de hacer fetchData');
 fetchData();

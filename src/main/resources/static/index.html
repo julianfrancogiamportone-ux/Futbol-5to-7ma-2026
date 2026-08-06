@@ -3,26 +3,46 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pelea de Futbol</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>🔥 ¡Pelea de Futbolistas! 🔥</h1>
-    <div id="fight-container">
-        <div class="player">
-            <h2>Jugador 1</h2>
-            <img id="fighter1Image" src="placeholder1.png" alt="Personaje 1" class="fighter-img">
-            <select id="fighter1"></select>
+    <header>
+        <h1>🔥 ¡Pelea de Futbolistas! 🔥</h1>
+    </header>
+
+    <main>
+        <div class="battle-arena">
+            <div class="player-section">
+                <div class="player-card">
+                    <img id="fighter1Image" src="imagenes/unknown.jpeg" alt="Jugador 1" class="fighter-img">
+                    <h2 id="fighter1Name">Seleccionar jugador</h2>
+                    <p id="fighter1Club">-</p>
+                </div>
+                <select id="fighter1" class="player-select"></select>
+            </div>
+
+            <div class="vs-container">
+                <span class="vs-text">VS</span>
+            </div>
+
+            <div class="player-section">
+                <div class="player-card">
+                    <img id="fighter2Image" src="imagenes/unknown.jpeg" alt="Jugador 2" class="fighter-img">
+                    <h2 id="fighter2Name">Seleccionar jugador</h2>
+                    <p id="fighter2Club">-</p>
+                </div>
+                <select id="fighter2" class="player-select"></select>
+            </div>
         </div>
-        <div class="player">
-            <h2>Jugador 2</h2>
-            <img id="fighter2Image" src="placeholder2.png" alt="Personaje 2" class="fighter-img">
-            <select id="fighter2"></select>
-        </div>
-    </div>
-    <button id="fightButton">¡Pelear!</button>
-    <div id="result" class="hidden"></div>
+
+        <button id="fightButton" class="fight-btn">¡PELEAR!</button>
+
+        <div id="result" class="result hidden"></div>
+    </main>
+
     <script src="battle2.js"></script>
 </body>
 
